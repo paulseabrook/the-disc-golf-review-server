@@ -1,12 +1,12 @@
-const mongooseBaseName = 'full-stack-demo'
+const mongooseBaseName = 'THE-disc-golf-review';
 
 const database = {
-	development: `mongodb://localhost/${mongooseBaseName}-development`,
-	test: `mongodb://localhost/${mongooseBaseName}-test`,
-}
+  development: `mongodb://localhost/${mongooseBaseName}-development`,
+  test: `mongodb://localhost/${mongooseBaseName}-test`,
+};
 
-const localDb = process.env.TESTENV ? database.test : database.development
+const localDb = process.env.TESTENV ? database.test : database.development;
 
-const currentDb = process.env.DB_URI || localDb
+const currentDb = process.env.DB_URI || localDb;
 
-module.exports = currentDb
+module.exports = currentDb;
