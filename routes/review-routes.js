@@ -6,11 +6,10 @@ const Disc = require('../models/disc');
 const { handle404 } = require('../lib/custom-errors');
 const { requireToken } = require('../config/auth');
 
-
-
 // CREATE
 // POST /reviews/
 router.post('/reviews', requireToken, (req, res, next) => {
+  const discId = req.body.review.discId;
 
   const review = req.body.review;
   review.user = req.user._id;
