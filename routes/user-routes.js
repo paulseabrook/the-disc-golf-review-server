@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 
 const User = require('../models/user');
+// this will be used when we sign in
 const { createUserToken } = require('../config/auth');
 
 // SIGN UP
@@ -24,6 +25,8 @@ router.post('/sign-up', (req, res, next) => {
 // POST /sign-in
 router.post('/sign-in', (req, res, next) => {
   User.findOne({ email: req.body.credentials.email })
+    // upon signing in, we want to create a token for the user each time
+    // this token gives them access
     .then((user) => createUserToken(req, user))
     .then((token) => res.json({ token }))
     .catch(next);
