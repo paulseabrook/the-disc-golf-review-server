@@ -7,6 +7,7 @@ const cors = require('cors');
 // require the URI
 const db = require('./config/db');
 
+// require our routes
 const discRoutes = require('./routes/disc-routes');
 const reviewRoutes = require('./routes/review-routes');
 const userRoutes = require('./routes/user-routes');
@@ -26,12 +27,13 @@ mongoose.connect(db, {
 // Using the express function create an express app
 const app = express();
 
-// before any request come in whitelist our front end localhost
+// before any request come in whitelist our front end localhost (in my case it was 5502)
 app.use(cors({ origin: `http://127.0.0.1:5502` }));
 
 // For Express to accept the content type of json we have to use `express.json()` middleware and pass it to `app.use`
 app.use(express.json());
 
+// use our routes
 app.use(discRoutes);
 app.use(reviewRoutes);
 app.use(userRoutes);

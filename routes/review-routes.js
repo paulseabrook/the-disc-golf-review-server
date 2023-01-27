@@ -3,7 +3,9 @@ const router = express.Router();
 
 // require disc model
 const Disc = require('../models/disc');
+// handle for 404 errors
 const { handle404 } = require('../lib/custom-errors');
+// token needed for signing in
 const { requireToken } = require('../config/auth');
 
 // CREATE

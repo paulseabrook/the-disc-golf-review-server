@@ -23,7 +23,6 @@ router.get('/discs', requireToken, (req, res, next) => {
 // SHOW
 // GET /discs/5a7db6c74d55bc51bdf39793
 router.get('/discs/:id', requireToken, (req, res, next) => {
-  // req.params.id will be set based on the `:id` in the route
   Disc.findById(req.params.id)
     .then(handle404)
     .then((disc) => res.status(200).json({ disc: disc }))
