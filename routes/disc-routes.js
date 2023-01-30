@@ -47,30 +47,31 @@ router.patch('/discs/:id', requireToken, (req, res, next) => {
   Disc.findById(req.params.id)
     .then(handle404)
     .then((disc) => {
-      return disc.updateOne(req.body.disc);
+      // check if id's match to give user ability to update
+      if (disc.user.equals(req.user._id)) {
+        res.sendStatus(204);
+        return disc.updateOne(req.body.disc);
+      } else {
+        res.sendStatus(401);
+      }
     })
-    .then(() => res.sendStatus(204))
     .catch(next);
 });
 
 // DESTROY
 // DELETE /discs/5a7db6c74d55bc51bdf39793
 router.delete('/discs/:id', requireToken, (req, res, next) => {
-  //   Disc.findOneAndDelete(
-  //     { _id: req.params.id, userCreated: req.user._id },
-  //     function (err) {
-  //       res.redirect('/discs');
-  //     }
-  //   );
-
   Disc.findById(req.params.id)
     .then(handle404)
     .then((disc) => {
-      if (disc.user === req.user._id) {
+      // check if id's match to give user ability to delete
+      if (disc.user.equals(req.user._id)) {
         disc.deleteOne();
+        res.sendStatus(204);
+      } else {
+        res.sendStatus(401);
       }
     })
-    .then(() => res.sendStatus(204))
     .catch(next);
 });
 
