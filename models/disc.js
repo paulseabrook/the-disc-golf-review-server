@@ -33,7 +33,7 @@ const discSchema = new Schema(
     fade: {
       type: Number,
     },
-    userCreated: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
