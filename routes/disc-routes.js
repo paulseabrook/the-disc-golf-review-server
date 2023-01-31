@@ -49,9 +49,11 @@ router.patch('/discs/:id', requireToken, (req, res, next) => {
     .then((disc) => {
       // check if id's match to give user ability to update
       if (disc.user.equals(req.user._id)) {
+        // if true, send status of 204 and update the disc
         res.sendStatus(204);
         return disc.updateOne(req.body.disc);
       } else {
+        // else, send status of 401
         res.sendStatus(401);
       }
     })
@@ -66,9 +68,11 @@ router.delete('/discs/:id', requireToken, (req, res, next) => {
     .then((disc) => {
       // check if id's match to give user ability to delete
       if (disc.user.equals(req.user._id)) {
+        // if true delete the disc and send a status of 204
         disc.deleteOne();
         res.sendStatus(204);
       } else {
+        // else, send a status of 401
         res.sendStatus(401);
       }
     })

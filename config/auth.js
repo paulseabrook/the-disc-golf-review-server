@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Secret used to encrypt and decrypt token
+// if we don't have something local in process.env, use some string value
 const secret =
   process.env.JWT_SECRET || 'some string value only your app knows';
 

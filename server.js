@@ -13,7 +13,7 @@ const reviewRoutes = require('./routes/review-routes');
 const userRoutes = require('./routes/user-routes');
 
 // 'Magic numbers' should always be declared at the top of the file and named in all caps
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // To avoid the deprecation warning set `strictQuery` to true
 mongoose.set('strictQuery', true);
@@ -28,7 +28,7 @@ mongoose.connect(db, {
 const app = express();
 
 // before any request come in whitelist our front end localhost (in my case it was 5502)
-app.use(cors({ origin: `http://127.0.0.1:5502` }));
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://127.0.0.1.5502' }));
 
 // For Express to accept the content type of json we have to use `express.json()` middleware and pass it to `app.use`
 app.use(express.json());
