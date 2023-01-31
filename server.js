@@ -28,7 +28,7 @@ mongoose.connect(db, {
 const app = express();
 
 // before any request come in whitelist our front end localhost (in my case it was 5502)
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://127.0.0.1.5502' }));
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://127.0.0.1:5502` }));
 
 // For Express to accept the content type of json we have to use `express.json()` middleware and pass it to `app.use`
 app.use(express.json());
