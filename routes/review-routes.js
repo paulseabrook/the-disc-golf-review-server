@@ -11,9 +11,12 @@ const { requireToken } = require('../config/auth');
 // CREATE
 // POST /reviews/
 router.post('/reviews', requireToken, (req, res, next) => {
+  // from the body, the discID is the ObjectID of the disc we are reviewing
   const discId = req.body.review.discId;
 
+  // from the request body, grab the review
   const review = req.body.review;
+  // assign review.user to the ObjectID of the user who send the request
   review.user = req.user._id;
 
   Disc.findById(discId)
