@@ -12,6 +12,8 @@ const discSchema = new Schema(
       type: String,
       required: true,
     },
+    // If you are just declaring the type of the field you do not need to open an object to set multiple options. So:
+    // manufacturer: String
     manufacturer: {
       type: String,
     },
