@@ -1,34 +1,38 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 // require disc model
-const Disc = require('../models/disc');
+const Disc = require('../models/disc')
 // handle for 404 errors
-const { handle404 } = require('../lib/custom-errors');
+const { handle404 } = require('../lib/custom-errors')
 // token needed for signing in
-const { requireToken } = require('../config/auth');
+const { requireToken } = require('../config/auth')
 
 // CREATE
 // POST /reviews/
-router.post('/reviews', requireToken, (req, res, next) => {
-  // from the body, the discID is the ObjectID of the disc we are reviewing
-  const discId = req.body.review.discId;
+router.post(
+  'https://pauls-plastics-server.onrender.com/reviews',
+  requireToken,
+  (req, res, next) => {
+    // from the body, the discID is the ObjectID of the disc we are reviewing
+    const discId = req.body.review.discId
 
-  // from the request body, grab the review
-  const review = req.body.review;
-  // assign review.user to the ObjectID of the user who send the request
-  review.user = req.user._id;
+    // from the request body, grab the review
+    const review = req.body.review
+    // assign review.user to the ObjectID of the user who send the request
+    review.user = req.user._id
 
-  Disc.findById(discId)
-    .then(handle404)
-    .then((disc) => {
-      disc.reviews.push(req.body.review);
+    Disc.findById(discId)
+      .then(handle404)
+      .then((disc) => {
+        disc.reviews.push(req.body.review)
 
-      return disc.save();
-    })
+        return disc.save()
+      })
 
-    .then((disc) => res.status(201).json({ disc: disc }))
-    .catch(next);
-});
+      .then((disc) => res.status(201).json({ disc: disc }))
+      .catch(next)
+  }
+)
 
-module.exports = router;
+module.exports = router
