@@ -44,8 +44,11 @@ router.patch('/reviews/:id', requireToken, (req, res, next) => {
   const discId = req.body.review.discId
   Disc.findById(discId)
     .then((disc) => {
+      // if the user updating the review created the review...
       if (disc.user.equals(req.user._id)) {
+        // look through the reviews and find the review matching the request
         const review = disc.reviews.id(req.params.id)
+        // update the comment, rating
         review.comment = req.body.review.comment
         review.rating = req.body.review.rating
         return disc.save() // saves document with subdocuments and triggers validation
@@ -54,7 +57,7 @@ router.patch('/reviews/:id', requireToken, (req, res, next) => {
       }
     })
     .then((disc) => {
-      res.send({ disc })
+      res.send({ disc: disc })
     })
     .catch(next)
 })
