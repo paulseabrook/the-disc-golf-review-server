@@ -13,6 +13,7 @@ const reviewRoutes = require('./routes/review-routes')
 const userRoutes = require('./routes/user-routes')
 
 // 'Magic numbers' should always be declared at the top of the file and named in all caps
+// port 8000 is for render
 // const PORT = process.env.PORT || 8000
 const PORT = process.env.PORT || 8080
 
